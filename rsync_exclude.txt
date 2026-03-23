@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+captures/
+frames/
+*.pt
+*.onnx
+*.trt

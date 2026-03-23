@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Model weights
+*.pt
+*.onnx
+*.trt
+*.engine
+*.weights
+
+# Captured frames (runtime output — not source)
+jetson/captures/
+nuc/frames/
+
+# Secrets
+network/wpa_supplicant.conf
+*.key
+*.pem
+
+# Editor
+.vscode/
+*.swp
+*~

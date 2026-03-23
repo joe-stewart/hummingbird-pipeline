@@ -1,0 +1,4 @@
+# Python dependencies for capture.py
+# Install into cv-env: /opt/cv-env/bin/pip install -r requirements.txt
+requests
+websockets
