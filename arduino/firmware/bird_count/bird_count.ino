@@ -9,8 +9,8 @@
 #define DEBUG false
 
 // Network
-char ssid[] = SECRET_SSID;
-char pass[] = SECRET_PASS;
+char ssid[] = WIFI_SSID;
+char pass[] = WIFI_PASS;
 int status = WL_IDLE_STATUS;
 
 // UDP ping listener

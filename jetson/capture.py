@@ -13,7 +13,7 @@ import os
 # 8080 - Raw H.264 1920x1080 for high quality training data (future)
 NTFY_URL = "http://${RPI2_IP}:${NTFY_PORT}/bird/json"
 RECAMERA_WS = "ws://${RECAMERA_IP}:${RECAMERA_WS_PORT}"
-# RECAMERA_WS = "ws://${RECAMERA_IP}:8080}"
+# RECAMERA_WS = "ws://${RECAMERA_IP}:8080"
 ARDUINO_IP = "${ARDUINO_IP}"
 SAVE_DIR = "/opt/hummingbird/frames"
 ARDUINO_PORT = 8888

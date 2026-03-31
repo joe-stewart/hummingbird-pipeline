@@ -12,12 +12,7 @@ venv/
 *.engine
 *.weights
 
-# Captured frames (runtime output — not source)
-jetson/captures/
-nuc/frames/
-
 # Secrets
-network/wpa_supplicant.conf
 *.key
 *.pem
 
@@ -25,8 +20,6 @@ network/wpa_supplicant.conf
 .vscode/
 *.swp
 *~
-
-arduino/firmware/bird_count/arduino_secrets.h
 
 # bin/ is gitignored and used for local scripts
 bin/
