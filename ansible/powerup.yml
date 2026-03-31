@@ -1,5 +1,0 @@
----
-# powerup.yml — bring up lab devices in order
-# STATUS: pending — smart plug solution required for Jetson and RPi2
-# WOL investigated and closed — both devices cut NIC power completely on shutdown
-# See docs/decisions.md for full WOL history
