@@ -21,7 +21,7 @@ Both Jetson and RPi2 go fully dark on shutdown — NIC loses standby power.
 Smart plug is the correct solution. WOL investigation closed.
 
 ## SSH
-IdentitiesOnly yes in ~/.ssh/config for 192.168.2.* — prevents MaxAuthTries.
+IdentitiesOnly yes in ~/.ssh/config for ${SUBNET_OPT1} — prevents MaxAuthTries.
 
 ## Jetson Wheels
 Do not commit .whl files. Document source and version in jetson/install_notes.md.

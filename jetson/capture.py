@@ -7,14 +7,14 @@ import socket
 from datetime import datetime
 import os
 
-NTFY_URL = "http://192.168.2.10:8080/bird/json"
 # Stream ports
 # 8090 - JSON + base64 JPEG 640x640 with inference overlay (current)
 # 8080 - Raw H.264 1920x1080 for high quality training data (future)
-RECAMERA_WS = "ws://192.168.2.14:8090"
-# RECAMERA_WS = "ws://192.168.2.14:8080"
+NTFY_URL = "http://${RPI2_IP}:${NTFY_PORT}/bird/json"
+RECAMERA_WS = "ws://${RECAMERA_IP}:${RECAMERA_WS_PORT}"
+# RECAMERA_WS = "ws://${RECAMERA_IP}:8080}"
+ARDUINO_IP = "${ARDUINO_IP}"
 SAVE_DIR = "/opt/hummingbird/frames"
-ARDUINO_IP = "192.168.2.12"
 ARDUINO_PORT = 8888
 MAGIC = b"HUMM"
 

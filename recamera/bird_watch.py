@@ -5,7 +5,7 @@ log = open("/tmp/bird_watch.log", "w", buffering=1)
 sys.stdout = log
 sys.stderr = log
 
-NTFY_URL  = "http://192.168.2.10:8080/bird"
+NTFY_URL  = "http://${RPI2_IP}:${NTFY_PORT}/bird"
 TOPIC     = "sscma/v0/recamera/node/out/#"
 CAM_ID    = "birdcam1"
 NODE_ID   = "birdwatch1"

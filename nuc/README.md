@@ -1,6 +1,6 @@
 # NUC
 
-Development machine and frame viewer (192.168.1.12).
+Development machine and frame viewer on the LAN.
 
 ## Frames
 Captured frames are NOT committed to the repo. Pull them from the Jetson:

@@ -1,17 +1,6 @@
 # reCamera
 
-Sensor and inference node (192.168.2.14 wlan0 / 192.168.2.200 eth0).
-
-## Hardware
-- Seeed reCamera
-- OV5647 sensor, fixed focus ~1m to infinity
-- 8x12 LED matrix display (on-device, separate from Arduino)
-
-## Role in Pipeline
-- Runs CV inference via sscma-node
-- Publishes detections to local Mosquitto broker
-- bird_watch.py subscribes to Mosquitto, sends ntfy to RPi2 on detection
-- Streams annotated JPEG over WebSocket for frame capture by Jetson
+Sensor and inference node (wlan0 / eth0 fallback).
 
 ## Stream Ports
 | Port | Format | Use |
@@ -38,15 +27,15 @@ Subscribes to Mosquitto topic `sscma/v0/recamera/node/out/#`, watches for
 bird detections, sends ntfy notification to RPi2 with 60s cooldown.
 
 - ntfy topic: `bird`
-- ntfy URL: `http://192.168.2.10:8080/bird`
+- ntfy URL: `http://rpi2:8080/bird`
 - Cooldown: 60 seconds between notifications
 - Detection log: `tail -f /tmp/bird_watch.log`
 
 ## Network
 | Interface | IP | MAC | Notes |
 |-----------|-----|-----|-------|
-| wlan0 | 192.168.2.14 | a8:e2:91:2e:99:5b | Static Kea reservation |
-| eth0 | 192.168.2.200 | TBD | Dynamic, no reservation |
+| wlan0 | .14  | a8:e2:91:2e:99:5b | Static Kea reservation |
+| eth0  | .200 | TBD | Dynamic, no reservation |
 
 ### DHCP Fix — Important
 Two separate fixes were both required to stabilize wlan0 at .14:
@@ -70,7 +59,7 @@ skipped entirely. This provides a reliable recovery path if wlan0 has issues.
 Reserved for future reCamera overlay/config files. Empty at this stage.
 
 ## Useful Commands
-```bash
+```
 # SSH to reCamera
 ssh recamera   # uses ~/.ssh/config alias
 

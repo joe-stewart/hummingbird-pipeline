@@ -25,4 +25,8 @@ network/wpa_supplicant.conf
 .vscode/
 *.swp
 *~
+
 arduino/firmware/bird_count/arduino_secrets.h
+
+# bin/ is gitignored and used for local scripts
+bin/

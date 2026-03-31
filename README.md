@@ -3,12 +3,12 @@
 CV-based hummingbird detection and frame capture pipeline.
 
 ## Devices
-- **reCamera** (192.168.2.14) — sensor + inference (OV5647, sscma-node)
-- **Jetson** (192.168.2.8) — orchestration + frame capture
-- **Arduino R4** (192.168.2.12) — LED matrix + heartbeat watchdog
-- **RPi2** (192.168.2.10) — ntfy broker
-- **Beryl** (192.168.2.2) — OpenWrt AP
-- **NUC** (192.168.1.12) — frame viewing + development
+- **reCamera** (${RECAMERA_IP}) - sensor + inference (OV5647, sscma-node)
+- **Jetson** (${JETSON_IP}) - orchestration + frame capture
+- **Arduino R4** (${ARDUINO_IP}) - LED matrix + heartbeat watchdog
+- **RPi2** (${RPI2_IP}) - ntfy broker
+- **Beryl** (${BERYL_IP}) - Wifi AP
+- **NUC** (${NUC_IP}) - frame viewing + development
 
 ## Flow
 ```

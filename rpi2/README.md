@@ -1,6 +1,6 @@
 # RPi2
 
-Broker node (192.168.2.10) — runs Mosquitto and ntfy as Docker containers.
+Broker node — runs Mosquitto and ntfy as Docker containers.
 
 ## Role in Pipeline
 - Mosquitto receives detections from reCamera (via bird_watch.py)
@@ -23,16 +23,16 @@ docker compose up -d
 docker compose ps
 
 # Watch ntfy stream (from any machine on OPT1)
-curl -s http://192.168.2.10:8080/bird/json
+curl -s http://rpi2:8080/bird/json
 
 # Watch raw messages
-curl -s http://192.168.2.10:8080/bird/raw
+curl -s http://rpi2:8080/bird/raw
 ```
 
 ## ntfy Topic
 - Topic: `bird`
-- Publisher: reCamera bird_watch.py → http://192.168.2.10:8080/bird
-- Subscriber: Jetson capture.py → http://192.168.2.10:8080/bird/json
+- Publisher: reCamera bird_watch.py → http://rpi2:8080/bird
+- Subscriber: Jetson capture.py → http://rpi2:8080/bird/json
 
 ## WOL Status
 WOL investigated and closed. RPi2 powers off completely on shutdown —
