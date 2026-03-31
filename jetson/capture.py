@@ -1,3 +1,4 @@
+import time
 import requests
 import json
 import asyncio
@@ -44,12 +45,15 @@ async def grab_frame():
 
 def listen():
     print("Listening for notifications...")
-    with requests.get(NTFY_URL, stream=True) as r:
-        for line in r.iter_lines():
-            if line:
-                msg = json.loads(line)
-                if msg.get("event") == "message":
-                    print(f"Got notification: {msg.get('message')}")
-                    asyncio.run(grab_frame())
-
-listen()
+    while True:
+        try:
+            with requests.get(NTFY_URL, stream=True, timeout=60) as r:
+                for line in r.iter_lines():
+                    if line:
+                        msg = json.loads(line)
+                        if msg.get("event") == "message":
+                            print(f"Got notification: {msg.get('message')}")
+                            asyncio.run(grab_frame())
+        except Exception as e:
+            print(f"ntfy connection lost: {e}, retrying in 10s")
+            time.sleep(10)
