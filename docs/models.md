@@ -18,5 +18,5 @@
 
 ## Confidence Threshold
 - Current: no minimum (all detections saved)
-- Baseline captures: ~52-55% (low light, suboptimal angle)
+- Baseline not yet established — collecting frames for calibration
 - Revisit after accumulating frames across varied conditions
