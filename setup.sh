@@ -11,7 +11,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG="$REPO_ROOT/config.env"
 BIN="$REPO_ROOT/bin"
 MAKEFILE="$BIN/Makefile"
-INVENTORY="$HOME/ansible/inventory.ini"
+INVENTORY="${ANSIBLE_INVENTORY:-$HOME/ansible/inventory.ini}"
 
 # ── Admin path ────────────────────────────────────────────────────────────────
 if [ -d "$BIN" ]; then
@@ -19,7 +19,7 @@ if [ -d "$BIN" ]; then
     make -C "$BIN" clean && make -C "$BIN"
     echo ""
     if command -v ansible &>/dev/null && [ -f "$INVENTORY" ]; then
-        ansible-playbook -i "$INVENTORY" "$HOME/hummingbird-pipeline/ansible/health.yml"
+        ansible-playbook -i "$INVENTORY" "$REPO_ROOT/ansible/health.yml"
     else
         echo "  (ansible not found or inventory not generated — skipping ping)"
     fi
@@ -72,8 +72,7 @@ if [ -f "$CONFIG" ]; then
     done < "$CONFIG"
 
     for tmpl in jetson/capture.py recamera/bird_watch.py recamera/wpa_supplicant.conf \
-                ansible/inventory.ini arduino/firmware/bird_count/arduino_secrets.h \
-                docs/architecture.md docs/decisions.md docs/devices.md docs/models.md; do
+                    arduino/firmware/bird_count/arduino_secrets.h; do
         outfile="$REPO_ROOT/generated/$tmpl"
         mkdir -p "$(dirname "$outfile")"
         envsubst < "$REPO_ROOT/$tmpl" > "$outfile"
