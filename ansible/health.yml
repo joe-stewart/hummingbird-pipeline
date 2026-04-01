@@ -1,0 +1,30 @@
+---
+- name: OpenWrt Health Check
+  hosts: openwrt
+  gather_facts: false
+  tasks:
+    - name: Ping
+      raw: echo ok
+
+- name: Lab Health Check
+  hosts: all:!openwrt
+  gather_facts: yes
+  tasks:
+    - name: Ping
+      ping:
+
+    - name: Disk space
+      shell: df -h /
+      register: disk
+
+    - name: Memory
+      shell: free -m
+      register: mem
+
+    - name: Show disk
+      debug:
+        msg: "{{ disk.stdout }}"
+
+    - name: Show memory
+      debug:
+        msg: "{{ mem.stdout }}"
