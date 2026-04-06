@@ -6,7 +6,6 @@ on a reCamera, orchestrated by a Jetson, with Arduino alerting and RPi notificat
 ## Status
 
 Data collection phase — pipeline is running and capturing frames. No trained model yet.
-
 ![pipeline diagram](docs/pipeline.svg)
 
 ## Hardware
