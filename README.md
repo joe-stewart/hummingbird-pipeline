@@ -7,6 +7,8 @@ on a reCamera, orchestrated by a Jetson, with Arduino alerting and RPi notificat
 
 Data collection phase — pipeline is running and capturing frames. No trained model yet.
 
+![pipeline diagram](docs/pipeline.svg)
+
 ## Hardware
 
 | Device | Model | Role |
@@ -20,8 +22,6 @@ Data collection phase — pipeline is running and capturing frames. No trained m
 > **Note on WiFi AP**: The Beryl was chosen specifically for reliable AP mode.
 > The GL.iNet Opal (MT300N-V2) has known issues in AP mode that caused
 > connectivity problems with the reCamera — avoid it for this use case.
-
-![pipeline diagram](docs/pipeline.svg)
 
 ## Configuration
 
