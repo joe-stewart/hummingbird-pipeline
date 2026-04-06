@@ -21,19 +21,7 @@ Data collection phase — pipeline is running and capturing frames. No trained m
 > The GL.iNet Opal (MT300N-V2) has known issues in AP mode that caused
 > connectivity problems with the reCamera — avoid it for this use case.
 
-## Flow
-
-```
-reCamera (sensor + inference)
-    ↓
-Jetson (orchestration + capture)
-    ↓              ↓
-  NUC           Arduino R4
-(viewing)        (alerting)
-    ↑
-  RPi
-(ntfy broker)
-```
+![pipeline diagram](docs/pipeline.svg)
 
 ## Configuration
 
