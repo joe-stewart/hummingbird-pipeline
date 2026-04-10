@@ -8,6 +8,34 @@ on a reCamera, orchestrated by a Jetson, with Arduino alerting and RPi notificat
 Data collection phase — pipeline is running and capturing frames. No trained model yet.
 ![pipeline diagram](docs/pipeline.svg)
 
+## Requirements
+
+**Admin machine** — any Linux, macOS, or WSL environment with:
+- Ansible
+- Python 3.x
+- SSH access to lab devices
+- `~/.ssh/birdcam_lab` key configured
+
+**Pipeline devices** — see [Devices](docs/devices.md) for hardware specifics
+
+**Python dependencies** (for test and utility scripts):
+- websockets
+- requests
+
+Install via:
+```bash
+pip install websockets requests
+```
+
+The admin machine is not part of the pipeline — use whatever you have.
+
+**Monitoring** (optional) — any always-on device on the network with:
+- Grafana
+- Prometheus
+- prometheus-node-exporter on each device you want to monitor
+
+See [Architecture](docs/architecture.md) for details.
+
 ## Hardware
 
 | Device | Model | Role |
