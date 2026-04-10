@@ -1,0 +1,73 @@
+---
+- name: Install and configure Grafana Alloy
+  hosts: lan,lab,!recamera
+  become: yes
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - wget
+          - gpg
+        state: present
+
+    - name: Add Grafana GPG key
+      shell: |
+        wget -q -O- https://apt.grafana.com/gpg.key | \
+        gpg --dearmor -o /etc/apt/keyrings/grafana.gpg
+      args:
+        creates: /etc/apt/keyrings/grafana.gpg
+
+    - name: Add Grafana apt repository
+      copy:
+        dest: /etc/apt/sources.list.d/grafana.list
+        content: "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main\n"
+      notify: apt update
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Alloy
+      apt:
+        name: alloy
+        state: present
+
+    - name: Deploy Alloy config
+      copy:
+        dest: /etc/alloy/config.alloy
+        content: |
+          logging {
+            level = "warn"
+          }
+
+          loki.write "local" {
+            endpoint {
+              url = "http://rpi:3100/loki/api/v1/push"
+            }
+          }
+
+          loki.source.journal "system" {
+            forward_to = [loki.write.local.receiver]
+            labels = {
+              job  = "systemd-journal",
+              host = "{{ inventory_hostname }}",
+            }
+          }
+      notify: restart alloy
+
+    - name: Enable and start Alloy
+      systemd:
+        name: alloy
+        enabled: yes
+        state: started
+
+  handlers:
+    - name: apt update
+      apt:
+        update_cache: yes
+
+    - name: restart alloy
+      systemd:
+        name: alloy
+        state: restarted
