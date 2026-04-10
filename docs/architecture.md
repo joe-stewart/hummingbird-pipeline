@@ -1,18 +1,5 @@
 # Architecture
 
-## Flow
-```
-reCamera (sensor + inference)
-    ↓
-Jetson (orchestration + capture)
-    ↓              ↓
-  NUC           Arduino R4
-(viewing)        (alerting)
-    ↑
-  RPi2
-(ntfy broker)
-```
-
 ## Components
 
 ### reCamera
@@ -32,12 +19,12 @@ Jetson (orchestration + capture)
 - Runs ntfy server on :8080
 - Broker between reCamera Mosquitto and Jetson HTTP stream
 
-### Arduino R4
+### Arduino R4 (optional)
 - 8x12 LED matrix display
 - Shows detection count
 - Watchdog: displays warn frame if heartbeat missed 2x interval
 - UDP listener on :8888, magic bytes b"HUMM"
 
-### NUC
-- Development machine
-- Frame review via rsync from Jetson
+### Beryl (optional)
+- WiFi AP for lab devices
+- Required if any pipeline device connects via WiFi
