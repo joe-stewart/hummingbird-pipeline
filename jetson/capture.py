@@ -57,3 +57,4 @@ def listen():
         except Exception as e:
             print(f"ntfy connection lost: {e}, retrying in 10s")
             time.sleep(10)
+listen()
