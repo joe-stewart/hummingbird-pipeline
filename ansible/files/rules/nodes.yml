@@ -1,0 +1,11 @@
+groups:
+  - name: nodes
+    rules:
+      - alert: InstanceDown
+        expr: up{job="nodes"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "{{ $labels.instance }} has been unreachable for more than 2 minutes."

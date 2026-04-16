@@ -1,0 +1,11 @@
+groups:
+  - name: hummingbird
+    rules:
+      - alert: HummingbirdExporterDown
+        expr: up{job="hummingbird"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Hummingbird exporter is down"
+          description: "The hummingbird exporter on {{ $labels.instance }} has been down for more than 2 minutes."

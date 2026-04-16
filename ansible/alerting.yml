@@ -1,0 +1,27 @@
+---
+- name: Deploy Prometheus alerting rules
+  hosts: rpi
+  become: yes
+  tasks:
+    - name: Ensure rules directory exists
+      file:
+        path: /etc/prometheus/rules
+        state: directory
+        owner: prometheus
+        group: prometheus
+        mode: '0755'
+
+    - name: Deploy alert rule files
+      copy:
+        src: files/rules/
+        dest: /etc/prometheus/rules/
+        owner: prometheus
+        group: prometheus
+        mode: '0644'
+      notify: reload prometheus
+
+  handlers:
+    - name: reload prometheus
+      systemd:
+        name: prometheus
+        state: reloaded
