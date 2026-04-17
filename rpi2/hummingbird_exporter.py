@@ -2,17 +2,17 @@
 """
 hummingbird_exporter.py — Prometheus metrics for hummingbird detection pipeline
 Subscribes to ntfy detection stream, exposes metrics on :9101
+Temperature read from /tmp/recamera_temp (written by collect_temp.sh via cron)
 """
 import json
 import time
 import threading
-import subprocess
 import requests
 from prometheus_client import start_http_server, Counter, Gauge
 
 NTFY_URL     = "http://localhost:8080/bird/json"
 METRICS_PORT = 9101
-RECAMERA     = "recamera"
+TEMP_FILE    = "/tmp/recamera_temp"
 TEMP_INTERVAL = 900  # 15 minutes
 
 detections_total = Counter(
@@ -31,19 +31,12 @@ recamera_temperature = Gauge(
 def collect_temp():
     while True:
         try:
-            result = subprocess.run(
-                ["ssh", "-o", "StrictHostKeyChecking=no", RECAMERA,
-                 "cat /sys/class/thermal/thermal_zone0/temp"],
-                capture_output=True, text=True, timeout=10
-            )
-            if result.returncode == 0:
-                temp_c = int(result.stdout.strip()) / 1000.0
+            with open(TEMP_FILE) as f:
+                temp_c = int(f.read().strip()) / 1000.0
                 recamera_temperature.set(temp_c)
                 print(f"reCamera temp: {temp_c}°C")
-            else:
-                print(f"Temp read failed: {result.stderr}")
         except Exception as e:
-            print(f"Temp collection error: {e}")
+            print(f"Temp read error: {e}")
         time.sleep(TEMP_INTERVAL)
 
 def listen():
