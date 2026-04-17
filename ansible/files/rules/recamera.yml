@@ -1,0 +1,11 @@
+groups:
+  - name: recamera
+    rules:
+      - alert: RecameraTempWarning
+        expr: recamera_temperature_celsius > 60
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "reCamera temperature high"
+          description: "reCamera temp is {{ $value }}°C"
