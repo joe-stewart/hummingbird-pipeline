@@ -4,6 +4,7 @@ hummingbird_exporter.py — Prometheus metrics for hummingbird detection pipelin
 Subscribes to ntfy detection stream, exposes metrics on :9101
 Temperature read from /tmp/recamera_temp (written by collect_temp.sh via cron)
 """
+import os
 import json
 import time
 import threading
@@ -29,6 +30,9 @@ recamera_temperature = Gauge(
 )
 
 def collect_temp():
+    if not os.path.exists(TEMP_FILE):
+        with open(TEMP_FILE, 'w') as f:
+                f.write('0')
     while True:
         try:
             with open(TEMP_FILE) as f:
