@@ -1,0 +1,2 @@
+# Collect reCamera temperature every 15 minutes
+*/15 * * * * joe /opt/hummingbird/bin/collect_temp.sh
