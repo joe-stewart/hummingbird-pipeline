@@ -38,7 +38,7 @@ def collect_temp():
             with open(TEMP_FILE) as f:
                 temp_c = int(f.read().strip()) / 1000.0
                 recamera_temperature.set(temp_c)
-                print(f"reCamera temp: {temp_c}°C")
+    #            print(f"reCamera temp: {temp_c}°C")
         except Exception as e:
             print(f"Temp read error: {e}")
         time.sleep(TEMP_INTERVAL)
