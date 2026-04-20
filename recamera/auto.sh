@@ -7,7 +7,7 @@ if cat /sys/class/net/eth0/carrier 2>/dev/null | grep -q "1"; then
 else
     echo "[network] no ethernet, starting wifi"
     wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
-    sleep 5
+    sleep 15
     # dhcpcd handles wlan0 lease — no udhcpc needed
 #    udhcpc -i wlan0
 fi
@@ -21,3 +21,4 @@ done &
 
 sleep 8
 python3 -u /userdata/bird_watch.py >> /tmp/bird_watch.log 2>&1 &
+echo 0 > /sys/class/leds/red/brightness
