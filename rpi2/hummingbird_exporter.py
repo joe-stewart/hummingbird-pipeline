@@ -55,6 +55,7 @@ def listen():
                 for line in r.iter_lines():
                     if line:
                         msg = json.loads(line)
+                        #print(f"[debug] event: {msg.get('event')} data: {str(msg)[:100]}")
                         if msg.get("event") == "message":
                             detections_total.inc()
                             last_detection_timestamp.set(time.time())
